@@ -21,6 +21,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs:
+      prepare
 
     steps:
       - name: 'Tests'
@@ -28,10 +30,14 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    needs:
+      prepare
+    env:
+      NODE_ENV: production
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
       - name: Build
-        run: NODE_ENV=production yarn build
+        run: yarn build
