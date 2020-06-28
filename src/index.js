@@ -5,7 +5,16 @@ import "./index.css"
 
 import { worker } from "./mocks/browser"
 ;(async () => {
-  await worker.start()
+  await worker.start({
+    serviceWorker: {
+      url: process.env.PUBLIC_URL + "/mockServiceWorker.js",
+      options: {
+        scope: process.env.PUBLIC_URL,
+      },
+    },
+  })
+
+  console.log(process.env.PUBLIC_URL)
 
   ReactDOM.render(
     <React.StrictMode>
