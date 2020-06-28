@@ -28,8 +28,10 @@ jobs:
           NODE_ENV: production
         run: yarn build
 
-      - name: 'Upload artifacts'
-        uses: actions/upload-artifact@v1
-        with:
-          name: build
-          path: build
+      - name: 'Deploy 🚀'
+          if: ${{ github.event_name == 'push' }}
+          uses: JamesIves/github-pages-deploy-action@releases/v3
+          with:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            BRANCH: gh-pages
+            FOLDER: build
