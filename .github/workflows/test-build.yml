@@ -21,7 +21,12 @@ jobs:
         run: yarn
 
       - name: 'Test'
-        run: yarn test
+        run: yarn test --coverage
+
+      - name: 'Deploy coverage'
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 'Update service worker mocks'
         run: yarn update-mocks
