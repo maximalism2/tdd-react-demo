@@ -12,5 +12,6 @@ export function fakePosts(amount = 3) {
     id: faker.random.uuid(),
     content: faker.lorem.lines(),
     author: fakeAuthor(),
+    timestamp: faker.date.recent(),
   }))
 }

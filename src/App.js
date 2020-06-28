@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <h1>TDD in React is awesome!!!</h1>
+      <h1>TDD in React is 🔥</h1>
 
       {posts.map((post) => (
         <Post key={post.id} {...post} />

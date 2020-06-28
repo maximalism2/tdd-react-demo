@@ -7,6 +7,7 @@ const firstTestPost = {
     fullName: "First Post Author Name",
   },
   content: "First post content",
+  timestamp: 1593347237010,
   comments: [
     {
       id: "first-comment-id",
@@ -26,6 +27,7 @@ const secondTestPost = {
     fullName: "Second Post Author Name",
   },
   content: "Second post content",
+  timestamp: 1593347137010,
   comments: [],
 }
 
