@@ -24,7 +24,7 @@ jobs:
         run: yarn test
 
       - name: 'Update service worker mocks'
-          run: yarn update-mocks
+        run: yarn update-mocks
 
       - name: 'Build'
         env:
