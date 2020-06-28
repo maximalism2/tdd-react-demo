@@ -23,9 +23,13 @@ jobs:
       - name: 'Test'
         run: yarn test
 
+      - name: 'Update service worker mocks'
+          run: yarn update-mocks
+
       - name: 'Build'
         env:
           NODE_ENV: production
+          PUBLIC_URL: https://necinc.github.io/tdd-react-demo/
         run: yarn build
 
       - name: 'Deploy 🚀'
