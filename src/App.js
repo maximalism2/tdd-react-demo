@@ -19,6 +19,7 @@ function App() {
 
   return (
     <div>
+      {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
       <h1>TDD in React is 🔥</h1>
 
       {posts.map((post) => (
