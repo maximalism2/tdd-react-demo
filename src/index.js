@@ -9,12 +9,10 @@ import { worker } from "./mocks/browser"
     serviceWorker: {
       url: process.env.PUBLIC_URL + "/mockServiceWorker.js",
       options: {
-        scope: process.env.PUBLIC_URL,
+        scope: process.env.PUBLIC_URL + "/",
       },
     },
   })
-
-  console.log(process.env.PUBLIC_URL)
 
   ReactDOM.render(
     <React.StrictMode>
