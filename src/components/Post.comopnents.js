@@ -23,10 +23,10 @@ const AuthorWrapper = styled.div`
   align-items: center;
 `
 const AuthorAvatar = styled.img`
-  width: 3rem;
-  height: 3rem;
+  width: 2em;
+  height: 2em;
   border-radius: 0.2rem;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 `
 const AuthorName = styled.span`
   font-weight: bold;

@@ -13,6 +13,7 @@
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "msw": "^0.19.5",
     "prettier": "^2.0.5",
+    "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
