@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://necinc.github.io/tdd-react-demo/precache-manifest.4ada062d250b564af3d153dbe7d818ba.js"
+  "https://necinc.github.io/tdd-react-demo/precache-manifest.7a58dedf1aafb9cef91aa8c6c9ffe9a5.js"
 );
 
 self.addEventListener('message', (event) => {
