@@ -27,3 +27,9 @@ jobs:
         env:
           NODE_ENV: production
         run: yarn build
+
+      - name: 'Upload artifacts'
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: build
