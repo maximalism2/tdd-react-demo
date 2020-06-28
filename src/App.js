@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { makeCancelable } from "./lib/makeCancelable"
+import { noop } from "./lib/noop"
+import { Post } from "./components/Post"
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -7,7 +9,10 @@ function App() {
   useEffect(() => {
     const postsFetcher = makeCancelable(fetch("/posts"))
 
-    postsFetcher.promise.then((response) => response.json()).then(setPosts)
+    postsFetcher.promise
+      .then((response) => response.json())
+      .then(setPosts)
+      .catch(noop)
 
     return () => postsFetcher.cancel()
   }, [])
@@ -15,10 +20,9 @@ function App() {
   return (
     <div>
       <h1>TDD in React is awesome!!!</h1>
+
       {posts.map((post) => (
-        <code key={post.id}>
-          <pre>{JSON.stringify(post, 0, 2)}</pre>
-        </code>
+        <Post key={post.id} {...post} />
       ))}
     </div>
   )

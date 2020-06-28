@@ -3,7 +3,7 @@ import faker from "faker"
 export function fakeAuthor() {
   return {
     avatar: faker.image.avatar(),
-    fullName: faker.name.findName(),
+    fullName: faker.name.findName("", "", undefined),
   }
 }
 
