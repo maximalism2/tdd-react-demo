@@ -49,60 +49,30 @@ describe("Post", () => {
     expect(screen.getByText("2020-06-28")).toBeInTheDocument()
   })
 
-  it("renders post comments", () => {
-    const comments = [
-      getTestComment({ id: "first", content: "First comment" }),
-      getTestComment({ id: "second", content: "Second comment" }),
-    ]
-
-    render(buildPost({ comments }))
-
-    expect(screen.getByText("First comment")).toBeInTheDocument()
-    expect(screen.getByText("Second comment")).toBeInTheDocument()
-  })
-
-  describe("Truncated comments", () => {
-    const comments = [
-      getTestComment({ id: "first", content: "First comment" }),
-      getTestComment({ id: "second", content: "Second comment" }),
-      getTestComment({ id: "third", content: "Third comment" }),
-    ]
-
-    beforeEach(() => {
-      server.use(
-        rest.get("/posts/:postId/comments", (req, res, ctx) => {
-          const { postId } = req.params
-
-          if (postId !== "post-with-comments") {
-            ctx.set("statusCode", 404)
-            return res(ctx.text("Not found"))
-          }
-
-          return res(ctx.json(comments))
-        })
-      )
-    })
-
-    it("loads all comments when user presses `show 2 more` button", async () => {
-      render(
-        buildPost({
-          id: "post-with-comments",
-          totalComments: 3,
-          comments: comments.slice(0, 1),
-        })
-      )
-
-      expect(screen.getByText("First comment")).toBeInTheDocument()
-      expect(screen.queryByText("Second comment")).toBe(null)
-
-      userEvent.click(screen.getByText("Show 2 more"))
-
-      expect(await screen.findByText("Second comment")).toBeInTheDocument()
-      expect(await screen.findByText("Third comment")).toBeInTheDocument()
-      expect(screen.queryByRole("button")).toBe(null)
-    })
-  })
+  describe("Comments", () => {})
 })
+
+// Rest handler for asynchronous comments
+// beforeEach(() => {
+//   server.use(
+//     rest.get("/posts/:postId/comments", (req, res, ctx) => {
+//       const { postId } = req.params
+//
+//       if (postId !== "post-with-comments") {
+//         ctx.set("statusCode", 404)
+//         return res(ctx.text("Not found"))
+//       }
+//
+//       return res(ctx.json(comments))
+//     })
+//   )
+// })
+
+// const comments = [
+//   getTestComment({ id: "first", content: "First comment" }),
+//   getTestComment({ id: "second", content: "Second comment" }),
+//   getTestComment({ id: "third", content: "Third comment" }),
+// ]
 
 function getTestComment(overrides) {
   return mergeDeepRight(

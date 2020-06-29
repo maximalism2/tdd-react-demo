@@ -40,3 +40,10 @@ export const PostDate = styled.span`
   color: #666;
   font-size: 0.8rem;
 `
+export const CommentsWrapper = styled.section`
+  border-top: 1px solid #ddd;
+  font-size: 0.85rem;
+`
+export const CommentWrapper = styled.article`
+  padding: 1em;
+`

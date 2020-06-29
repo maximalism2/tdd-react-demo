@@ -1,16 +1,8 @@
 import React from "react"
 import { format } from "date-fns"
-import { Author, PostContainer, PostDate, PostHeader } from "./Post.comopnents"
-import { Comments } from "./Comments"
+import { Author, PostContainer, PostDate, PostHeader } from "./Post.components"
 
-export function Post({
-  id,
-  author,
-  content,
-  timestamp,
-  totalComments,
-  comments,
-}) {
+export function Post({ author, content, timestamp }) {
   return (
     <PostContainer>
       <PostHeader>
@@ -20,8 +12,6 @@ export function Post({
       </PostHeader>
 
       <p>{content}</p>
-
-      <Comments comments={comments} totalComments={totalComments} postId={id} />
     </PostContainer>
   )
 }
