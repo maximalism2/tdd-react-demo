@@ -4,29 +4,28 @@ import { Author } from "./Post.comopnents"
 
 const TRUNCATE_THRESHOLD = 2
 
-export function Comments({ comments }) {
-  const [commentsTruncated, setCommentsTruncated] = useState(true)
+export function Comments({ postId, totalComments, comments }) {
+  const [loadedComments, setLoadedComments] = useState([])
 
   if (comments.length === 0) {
     return null
   }
 
-  const shouldTruncateComments =
-    comments.length > TRUNCATE_THRESHOLD && commentsTruncated
-  const commentsToShow = shouldTruncateComments
-    ? comments.slice(0, 1)
-    : comments
+  async function loadAllComments() {
+    const response = await fetch(`/posts/${postId}/comments`)
+    setLoadedComments(await response.json())
+  }
+
+  const allCommentsLoaded = loadedComments.length > 0
+  const commentsToShow = allCommentsLoaded ? loadedComments : comments
 
   return (
     <CommentsWrapper>
       {commentsToShow.map((comment) => (
         <Comment key={comment.id} {...comment} />
       ))}
-      {shouldTruncateComments && commentsTruncated && (
-        <ShowMoreButton
-          count={comments.length - 1}
-          onClick={() => setCommentsTruncated(false)}
-        />
+      {!allCommentsLoaded && totalComments > TRUNCATE_THRESHOLD && (
+        <ShowMoreButton count={totalComments - 1} onClick={loadAllComments} />
       )}
     </CommentsWrapper>
   )
