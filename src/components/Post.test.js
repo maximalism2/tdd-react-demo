@@ -1,8 +1,8 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
-import { mergeDeepRight } from "ramda"
-import userEvent from "@testing-library/user-event"
-import { rest } from "msw"
+// import { mergeDeepRight } from "ramda"
+// import userEvent from "@testing-library/user-event"
+// import { rest } from "msw"
 
 import { mockServer, server } from "../mocks/server"
 
@@ -52,6 +52,20 @@ describe("Post", () => {
   describe("Comments", () => {})
 })
 
+// function getTestComment(overrides) {
+//   return mergeDeepRight(
+//     {
+//       id: "test-comment",
+//       author: {
+//         avatar: "/comment_author_avatar.webp",
+//         fullName: "Comment author full name",
+//       },
+//       content: "Comment content",
+//     },
+//     overrides
+//   )
+// }
+
 // Rest handler for asynchronous comments
 // beforeEach(() => {
 //   server.use(
@@ -73,17 +87,3 @@ describe("Post", () => {
 //   getTestComment({ id: "second", content: "Second comment" }),
 //   getTestComment({ id: "third", content: "Third comment" }),
 // ]
-
-function getTestComment(overrides) {
-  return mergeDeepRight(
-    {
-      id: "test-comment",
-      author: {
-        avatar: "/comment_author_avatar.webp",
-        fullName: "Comment author full name",
-      },
-      content: "Comment content",
-    },
-    overrides
-  )
-}
