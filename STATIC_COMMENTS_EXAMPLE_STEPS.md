@@ -221,7 +221,10 @@ it("shows all comments after clicking on `Show N more` button", () => {
       <h3>Comments</h3>
 
       {commentsToShow.map((comment) => (
-        <CommentWrapper key={comment.id}>{comment.content}</CommentWrapper>
+        <CommentWrapper key={comment.id}>
+          <Author {...comment.author} />
+          <p>{comment.content}</p>
+        </CommentWrapper>
       ))}
 
       {hasMultipleComments && commentsTruncated && (
