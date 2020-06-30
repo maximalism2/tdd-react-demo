@@ -48,6 +48,7 @@ describe("Post", () => {
     expect(screen.getByText("2020-06-28")).toBeInTheDocument()
   })
 
+
   describe("Comments", () => {
     const comments = [
       getTestComment({ id: "first", content: "First comment" }),
