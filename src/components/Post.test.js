@@ -2,6 +2,7 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import { mergeDeepRight } from "ramda"
 import userEvent from "@testing-library/user-event"
+import { rest } from "msw"
 
 import { mockServer, server } from "../mocks/server"
 
@@ -22,6 +23,7 @@ describe("Post", () => {
         timestamp={1593340437010}
         content="Default post content"
         comments={[]}
+        totalComments={0}
         {...props}
       />
     )
@@ -48,13 +50,14 @@ describe("Post", () => {
     expect(screen.getByText("2020-06-28")).toBeInTheDocument()
   })
 
-
   describe("Comments", () => {
     const comments = [
       getTestComment({ id: "first", content: "First comment" }),
       getTestComment({ id: "second", content: "Second comment" }),
       getTestComment({ id: "third", content: "Third comment" }),
     ]
+
+    const firstComment = comments[0]
 
     it("renders comments for the post", () => {
       render(buildPost({ comments: [getTestComment()] }))
@@ -72,7 +75,7 @@ describe("Post", () => {
     })
 
     it("shows the first comment only when there are multiple comments present", () => {
-      render(buildPost({ comments }))
+      render(buildPost({ comments: [firstComment], totalComments: 3 }))
 
       expect(screen.getByText("First comment")).toBeInTheDocument()
       expect(screen.queryByText("Second comment")).toBe(null)
@@ -81,13 +84,32 @@ describe("Post", () => {
       expect(screen.getByRole("button")).toHaveTextContent("Show 2 more")
     })
 
-    it("shows all comments after clicking on `Show N more` button", () => {
-      render(buildPost({ comments }))
+    it("shows all comments after clicking on `Show N more` button", async () => {
+      server.use(
+        rest.get("/posts/:postId/comments", (req, res, ctx) => {
+          const { postId } = req.params
+
+          if (postId !== "post-with-comments") {
+            ctx.set("statusCode", 404)
+            return res(ctx.text("Not found"))
+          }
+
+          return res(ctx.json(comments))
+        })
+      )
+
+      render(
+        buildPost({
+          comments: [firstComment],
+          totalComments: 3,
+          id: "post-with-comments",
+        })
+      )
 
       userEvent.click(screen.getByText("Show 2 more"))
 
-      expect(screen.getByText("Second comment")).toBeInTheDocument()
-      expect(screen.getByText("Third comment")).toBeInTheDocument()
+      expect(await screen.findByText("Second comment")).toBeInTheDocument()
+      expect(await screen.findByText("Third comment")).toBeInTheDocument()
 
       expect(screen.queryByText("Show 2 more")).toBe(null)
     })
