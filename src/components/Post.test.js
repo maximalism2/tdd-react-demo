@@ -1,8 +1,5 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
-// import { mergeDeepRight } from "ramda"
-// import userEvent from "@testing-library/user-event"
-// import { rest } from "msw"
 
 import { mockServer, server } from "../mocks/server"
 
@@ -48,42 +45,4 @@ describe("Post", () => {
 
     expect(screen.getByText("2020-06-28")).toBeInTheDocument()
   })
-
-  describe("Comments", () => {})
 })
-
-// function getTestComment(overrides) {
-//   return mergeDeepRight(
-//     {
-//       id: "test-comment",
-//       author: {
-//         avatar: "/comment_author_avatar.webp",
-//         fullName: "Comment author full name",
-//       },
-//       content: "Comment content",
-//     },
-//     overrides
-//   )
-// }
-
-// Rest handler for asynchronous comments
-// beforeEach(() => {
-//   server.use(
-//     rest.get("/posts/:postId/comments", (req, res, ctx) => {
-//       const { postId } = req.params
-//
-//       if (postId !== "post-with-comments") {
-//         ctx.set("statusCode", 404)
-//         return res(ctx.text("Not found"))
-//       }
-//
-//       return res(ctx.json(comments))
-//     })
-//   )
-// })
-
-// const comments = [
-//   getTestComment({ id: "first", content: "First comment" }),
-//   getTestComment({ id: "second", content: "Second comment" }),
-//   getTestComment({ id: "third", content: "Third comment" }),
-// ]
