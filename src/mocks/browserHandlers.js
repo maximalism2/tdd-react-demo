@@ -1,5 +1,5 @@
 import { rest } from "msw"
-import { fakePosts } from "../lib/fakedData"
+import { fakePosts } from "./fakedData"
 
 const posts = fakePosts(5)
 
