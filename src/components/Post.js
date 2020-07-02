@@ -3,7 +3,14 @@ import { format } from "date-fns"
 import { Author, PostContainer, PostDate, PostHeader } from "./Post.components"
 import { Comments } from "./Comments"
 
-export function Post({ author, content, timestamp, comments }) {
+export function Post({
+  id,
+  author,
+  content,
+  timestamp,
+  comments,
+  totalComments,
+}) {
   return (
     <PostContainer>
       <PostHeader>
@@ -14,7 +21,7 @@ export function Post({ author, content, timestamp, comments }) {
 
       <p>{content}</p>
 
-      <Comments comments={comments} />
+      <Comments comments={comments} totalComments={totalComments} postId={id} />
     </PostContainer>
   )
 }
